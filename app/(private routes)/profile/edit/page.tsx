@@ -7,25 +7,6 @@ import { EditProfileParams, updateMe } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { ApiError } from "next/dist/server/api-utils";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "NoteHub - Edit Profile",
-  description: "NoteHub Edit Profile Page",
-  openGraph: {
-    title: "NoteHub - Edit Profile",
-    description: "NoteHub Edit Profile Page",
-    url: "https://study-rep-react-next-9.vercel.app/profile/edit",
-    images: [
-      {
-        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-        width: 1200,
-        height: 630,
-        alt: "NoteHub app",
-      },
-    ],
-  },
-};
 
 export default function EditProfilePage() {
   const { user, setUser } = useAuth();
