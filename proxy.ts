@@ -30,7 +30,8 @@ export async function proxy(request: NextRequest) {
           const parsed = parseSetCookie(cookieStr);
 
           if (parsed.value) {
-            cookieStore.set(parsed.name, parsed.value, parsed);
+            const { name, value, ...options } = parsed;
+            cookieStore.set(name, value, options);
           }
         }
         if (isPublicRoute) {
@@ -57,7 +58,7 @@ export async function proxy(request: NextRequest) {
     }
   }
   if (isPublicRoute) {
-    return NextResponse.redirect(new URL("/profile", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
   if (isPrivateRoute) {
     return NextResponse.next();

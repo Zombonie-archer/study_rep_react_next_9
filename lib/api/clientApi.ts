@@ -19,6 +19,11 @@ export interface RegisterParams {
   password: string;
 }
 
+export interface EditProfileParams {
+  username: string;
+  email: string;
+}
+
 export interface SessionResponse {
   success: boolean;
 }
@@ -82,7 +87,7 @@ export const logout = async (): Promise<void> => {
   await api.post<void>(`/auth/logout`);
 }
 
-export const updateMe = async (data: RegisterParams): Promise<User> => {
+export const updateMe = async (data: EditProfileParams): Promise<User> => {
   const response = await api.patch<User>(`/users/me`, data);
   return response.data;
 }

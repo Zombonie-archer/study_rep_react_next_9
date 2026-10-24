@@ -11,7 +11,7 @@ const initialDraft: NoteFormValues = {
 interface NoteDraftStore {
   draft: NoteFormValues;
   setDraft: (noteDraftData: Partial<NoteFormValues>) => void;
-  clearDraft: () => void;
+  resetDraft: () => void;
 }
 
 export const useNoteDraft = create<NoteDraftStore>()(
@@ -23,7 +23,7 @@ export const useNoteDraft = create<NoteDraftStore>()(
           draft: { ...prevState.draft, ...noteDraftData },
         }));
       },
-      clearDraft: () => {
+      resetDraft: () => {
         return set({ draft: initialDraft });
       },
     }),

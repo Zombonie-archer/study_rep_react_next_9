@@ -19,7 +19,7 @@ export default function NoteForm({ onCancel }: NoteFormProps) {
     mutationFn: (payload: NoteFormValues) => createNote(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
-      draftStore.clearDraft();
+      draftStore.resetDraft();
       onCancel();
     },
   });

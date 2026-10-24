@@ -1,6 +1,26 @@
 import Link from "next/link";
 import css from "./ProfilePage.module.css";
 import { getMe } from "@/lib/api/serverApi";
+import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NoteHub - Profile",
+  description: "NoteHub Profile Page",
+  openGraph: {
+    title: "NoteHub - Profile",
+    description: "NoteHub Profile Page",
+    url: "https://study-rep-react-next-9.vercel.app/profile",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NoteHub app",
+      },
+    ],
+  },
+};
 
 export default async function ProfilePage() {
   const user = await getMe();
@@ -14,7 +34,7 @@ export default async function ProfilePage() {
           </Link>
         </div>
         <div className={css.avatarWrapper}>
-          <img
+          <Image
             src={user.avatar}
             alt="User Avatar"
             width={120}

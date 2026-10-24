@@ -3,10 +3,29 @@ import Image from "next/image";
 import css from "./EditProfilePage.module.css";
 import { useAuth } from "@/lib/store/authStore";
 import { User } from "@/types/user";
-import { RegisterParams, updateMe } from "@/lib/api/clientApi";
+import { EditProfileParams, updateMe } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { ApiError } from "next/dist/server/api-utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NoteHub - Edit Profile",
+  description: "NoteHub Edit Profile Page",
+  openGraph: {
+    title: "NoteHub - Edit Profile",
+    description: "NoteHub Edit Profile Page",
+    url: "https://study-rep-react-next-9.vercel.app/profile/edit",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NoteHub app",
+      },
+    ],
+  },
+};
 
 export default function EditProfilePage() {
   const { user, setUser } = useAuth();
@@ -14,7 +33,7 @@ export default function EditProfilePage() {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    const newUser = Object.fromEntries(formData) as unknown as RegisterParams;
+    const newUser = Object.fromEntries(formData) as unknown as EditProfileParams;
     newUser.email = user?.email || "";
     try {
       const registeredUser: User = await updateMe(newUser);
@@ -60,7 +79,7 @@ export default function EditProfilePage() {
               <button type="submit" className={css.saveButton}>
                 Save
               </button>
-              <button type="button" className={css.cancelButton}>
+              <button type="button" className={css.cancelButton} onClick={() => router.back()}>
                 Cancel
               </button>
             </div>
