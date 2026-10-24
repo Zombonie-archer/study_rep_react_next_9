@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import TanstackProvider from "../components/TanStackProvider/TanStackProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -51,11 +52,13 @@ export default function RootLayout({ children, modal }: LayoutProps) {
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className={robotoFont.variable}>
         <TanstackProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <Header />
-          {children}
-          {modal}
-          <Footer />
+          <AuthProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <Header />
+            {children}
+            {modal}
+            <Footer />
+          </AuthProvider>
         </TanstackProvider>
       </body>
     </html>
